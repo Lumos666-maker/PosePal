@@ -1,0 +1,161 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * PosePal design system.
+ * Feminine, warm, editorial. Cream base, blush accents, deep espresso ink.
+ * Serif display (Fraunces) + clean grotesque (Inter).
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 20px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-blush: var(--blush);
+  --color-rose: var(--rose);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-sand: var(--sand);
+
+  --font-display: "Fraunces", "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: 0 30px 80px -30px color-mix(in oklab, var(--ink) 22%, transparent);
+  --shadow-card: 0 24px 60px -24px color-mix(in oklab, var(--rose) 45%, transparent);
+  --gradient-warm: radial-gradient(ellipse at top, oklch(0.96 0.03 40) 0%, oklch(0.955 0.018 60) 45%, oklch(0.94 0.025 30) 100%);
+  --gradient-blush: linear-gradient(135deg, oklch(0.9 0.055 20) 0%, oklch(0.94 0.035 45) 100%);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Warm cream canvas */
+  --background: oklch(0.972 0.014 70);
+  --foreground: oklch(0.24 0.03 30);
+
+  --card: oklch(0.985 0.008 70);
+  --card-foreground: oklch(0.24 0.03 30);
+  --popover: oklch(0.985 0.008 70);
+  --popover-foreground: oklch(0.24 0.03 30);
+
+  /* Deep espresso as primary */
+  --primary: oklch(0.28 0.035 35);
+  --primary-foreground: oklch(0.97 0.015 70);
+
+  --secondary: oklch(0.93 0.028 40);
+  --secondary-foreground: oklch(0.28 0.035 35);
+
+  --muted: oklch(0.94 0.02 60);
+  --muted-foreground: oklch(0.48 0.03 40);
+
+  --accent: oklch(0.88 0.06 20);
+  --accent-foreground: oklch(0.28 0.035 35);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.88 0.02 50);
+  --input: oklch(0.9 0.02 50);
+  --ring: oklch(0.75 0.08 20);
+
+  /* Semantic PosePal palette */
+  --blush: oklch(0.88 0.06 20);
+  --rose: oklch(0.78 0.11 15);
+  --cream: oklch(0.972 0.014 70);
+  --ink: oklch(0.24 0.03 30);
+  --sand: oklch(0.9 0.03 65);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html, body {
+    background: var(--gradient-warm);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility glass-card {
+  background: color-mix(in oklab, var(--cream) 78%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  box-shadow: var(--shadow-card);
+}
+
+@utility ink-button {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 999px;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  box-shadow: var(--shadow-soft);
+  &:hover {
+    transform: translateY(-2px);
+    background: color-mix(in oklab, var(--ink) 90%, var(--rose));
+  }
+  &:active { transform: translateY(0); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(1deg); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@utility animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
+@utility animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
